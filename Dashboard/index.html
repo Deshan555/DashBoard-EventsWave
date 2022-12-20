@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- Designined by EventsWave -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Admin Dashboard </title>-->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class=''></i>
+      <span class="logo_name">EventsWave</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#" class="active">
+            <i class='bx bx-signal-4' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bxs-home-alt-2' ></i>
+            <span class="links_name">Add Clubs</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-signal-4'></i>
+            <span class="links_name">Pending Req</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Settings</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="#">
+            <i class='bx bx-caret-right'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+        <span class="Overview">Overview</span>
+      </div>
+        <i class='bx bx-search' ></i>
+        <div class="right-side">
+      </div>
+        <i class='bx bx-bell'></i>
+        <div class="right-side">
+
+      <div class="profile-details">
+        <span class="admin_name">Name Name</span>
+        <i class='bx bxs-user-'></i>
+      </div>
+    </nav>
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box1">
+          <div class="right-side">
+            <div class="box-topic">Total Users</div>
+            <div class="number">1015</div>
+            <div class="indicator">
+            </div>
+          </div>
+        </div>
+        <div class="box2">
+          <div class="right-side">
+            <div class="box-topic">Total Comments</div>
+            <div class="number">5562</div>
+            <div class="indicator">
+            </div>
+          </div>
+        </div>
+        <div class="box3">
+          <div class="right-side">
+            <div class="box-topic">Total Clubs</div>
+            <div class="number">12</div>
+            <div class="indicator">
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+ <script>
+     let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebar");
+sidebar.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+  
+
+ </script>
+
+</body>
+</html>
+
