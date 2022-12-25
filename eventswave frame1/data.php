@@ -1,53 +1,20 @@
-<?php
+<?php 
+$connection = mysqli_connect("localhost","root","","event") or die("Error " . mysqli_error($connection));
 
-//data.php
+$sql = "SELECT comment_type , COUNT(comment_type)
+FROM        comments
+GROUP BY    comment_type";
+$result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
 
-$connect = new PDO("mysql:host=localhost;dbname=event", "root", "Gamage@97VI");
-
-if(isset($_POST["action"]))
-{
-	if($_POST["action"] == 'insert')
-	{
-		$data = array(
-			':commentID'		=>	$_POST["commentID"]
-		);
-
-		$query = "
-		INSERT INTO comments 
-		(commentID) VALUES (:commentID)
-		";
-
-		$statement = $connect->prepare($query);
-
-		$statement->execute($data);
-
-		echo 'done';
-	}
-
-	if($_POST["action"] == 'fetch')
-	{
-		$query = "
-		SELECT commentID, COUNT(commentID) AS Total 
-		FROM comments 
-		GROUP BY commentID
-		";
-
-		$result = $connect->query($query);
-
-		$data = array();
-
-		foreach($result as $row)
-		{
-			$data[] = array(
-				'commentID'		=>	$row["commentID"],
-				'total'			=>	$row["Total"],
-				'color'			=>	'#' . rand(100000, 999999) . ''
-			);
-		}
-
-		echo json_encode($data);
-	}
+$array = array();
+$i = 0;
+while($row = mysqli_fetch_assoc($result))
+{  
+    $orgname = $row['comment_type'];
+    $count = $row['COUNT(comment_type)'];
+    $array['cols'][] = array('type' => 'string'); 
+    $array['rows'][] = array('c' => array( array('v'=> $orgname), array('v'=>(int)$count)) );
 }
-
-
+$data = json_encode($array);
+echo $data;
 ?>

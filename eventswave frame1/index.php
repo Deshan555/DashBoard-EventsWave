@@ -103,7 +103,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <h3 class="collapse-header text-dark">Overview</h3>
+                    <h3 class="collapse-header text-dark font-weight-bold">Overview</h3>
 
                     <!-- Topbar Search-->
                     <ul class="navbar-nav ml-auto">
@@ -156,12 +156,12 @@
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+                                            <i class="fas fa-check-square text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
+                                        <div class="small text-dark">December 7, 2019</div>
+                                        new event has added to the event calender!
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -171,11 +171,11 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        <div class="small text-dark">December 2, 2019</div>
                                         Spending Alert: We've noticed unusually high spending for your account.
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-900" href="#">Show All Alerts</a>
                             </div>
                         </li>
 
@@ -235,7 +235,7 @@
                     <div class="row">
 
                         <!-- users Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 ">
+                        <div class="col-xl-4 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body bg-gradient-success">
                                     <div class="row no-gutters align-items-center">
@@ -253,7 +253,7 @@
                         </div>
 
                         <!-- comments Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 ">
+                        <div class="col-xl-4 col-md-6 mb-4 ">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body bg-gradient-primary">
                                     <div class="row no-gutters align-items-center">
@@ -273,7 +273,7 @@
          
 
                         <!-- clubs Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body bg-gradient-success">
                                     <div class="row no-gutters align-items-center">
@@ -293,15 +293,15 @@
 
                     <!-- Content Row -->
 
-                    <div class="row">
+                    <div class="row ">
 
                         <!-- Area Chart-->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
+                        <div class="col-xl-8 col-lg-7 ">
+                            <div class="card shadow mb-4 ">
                                 <!-- Card Header - Dropdown -->
                                 <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Total User Overview</h6>
+                                    class="card-header bg-info py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 h-8 font-weight-bold text-light">Total User Overview</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -314,80 +314,75 @@
 
 
 
-<?php 
+                        <?php 
 
-define("DB_HOST", "localhost");
-define("DB_USERNAME", "root");
-define("DB_PASSWORD", "Gamage@97VI");
-define("DB_DATABASE", "event");
-
-  $con = new mysqli("localhost","root","Gamage@97VI", "event");
-  $query = $con->query("SELECT commentID, COUNT(commentID) AS Total 
-  FROM comments 
-  GROUP BY commentID");
-
-  foreach($query as $data)
-  {
-    $commentID[] = $data['commentID'];
-    $total[] = $data['Total'];
-  }
-
-?>
+                        $dataPoints = array( 
+                            array("y" => 3373.64, "label" => "Germany" ),
+                            array("y" => 2435.94, "label" => "France" ),
+                            array("y" => 1842.55, "label" => "China" ),
+                            array("y" => 1828.55, "label" => "Russia" ),
+                            array("y" => 1039.99, "label" => "Switzerland" ),
+                            array("y" => 765.215, "label" => "Japan" ),
+                            array("y" => 612.453, "label" => "Netherlands" )
+                        );
 
 
-<div style="width: 500px;">
-  <canvas id="myChart"></canvas>
-</div>
- 
-<script>
-  // === include 'setup' then 'config' above ===
-  const labels = <?php echo json_encode($month) ?>;
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'My First Dataset',
-      data: <?php echo json_encode($date) ?>,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-      ],
-      borderWidth: 1
-    }]
-  };
+                                $connection = new mysqli("localhost","root","", "event");
+                                
+                                if(!$connection)
+                                die("could not connect" .mysqli_connect_error());
 
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
+                                $test=array();
+                                $count=0;
 
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-</script>
+                                $res=mysqli_query($connection,"SELECT *
+                                FROM users
+                                ORDER BY STR_TO_DATE(CONCAT('0001 ', Month, ' 01'), '%Y %M %d')");
+
+                               while($row = mysqli_fetch_array($res)){
+                                    $test[$count] ["label"]=$row["Month"];
+                                    $test[$count] ["y"]=$row["Total"];
+                                    $count=$count+1;
+                                }
 
 
+                                
+                                ?>
+                                <!DOCTYPE HTML>
+                                <html>
+                                <head>
+                                <script>
+                                window.onload = function() {
+                                
+                                var chart = new CanvasJS.Chart("chartContainer", {
+                                    animationEnabled: true,
+                                    theme: "light2",
+                                   
+                                    axisY: {
+                                        title: "Total Users"
+                                        },
+                                        axisX: {
+                                        interval: 1,
+
+                                        },
+                                        
+                                    data: [{
+                                        type: "spline",
+                                        markerSize: 5,
+                                        yValueFormatString: "#,##0.## users",
+                                        dataPoints: <?php echo json_encode($test, JSON_NUMERIC_CHECK); ?>
+                                    }]
+                                });
+                                chart.render();
+                                
+                                }
+                                </script>
+                                </head>
+                                <body>
+                                <div id="chartContainer" style="height: 330px; width: 100%; "></div>
+                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                                </body>
+                                </html>   
                                     </div>
                                 </div>
                             </div>
@@ -398,33 +393,53 @@ define("DB_DATABASE", "event");
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Total Clubs</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </a>
-                                    </div>
+                                    class="card-header bg-info py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-light">Total Comments Overview</h6>
+                                  
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
+                                    <html>
+                                    <head>
+                                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                                        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+                                        <script type="text/javascript">
+                                            function drawChart() {
+
+                                                var jsonData = $.ajax({
+                                                    url: "data.php",
+                                                    dataType: "json",
+                                                    async: false
+                                                }).responseText;
+                                            
+                                                var data = new google.visualization.DataTable(jsonData);
+
+                                                
+                                                var chart = new google.visualization.PieChart(document.getElementById('comments'));
+                                                chart.draw(data, {
+                                                width: 440,
+                                                height: 260,
+                                                colors: ['#1cc88a', '#858796','#4e73df'],
+                                                is3D: true
+                                                });     
+                                                }
+                                         
+
+                                            google.charts.load('current', {'packages':['corechart']});
+
+                                        
+                                            google.charts.setOnLoadCallback(drawChart);
+                                        </script>
+                                    </head>
+                                    <body>
+                                        <div id="comments"></div>
+                                    </body>
+                                </html>
                                     </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> #
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> #
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> #
-                                        </span>
-                                    </div>
-                                </div>
+                                  
                             </div>
                         </div>
-                    </div-->
                 
                     <!-- Content Row -->
                     <div class="row">
@@ -491,9 +506,11 @@ define("DB_DATABASE", "event");
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+
+
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-
+    <script src="data.php></script>
 
 </body>
 
