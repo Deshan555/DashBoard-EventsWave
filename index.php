@@ -213,7 +213,7 @@ session_start();
                                             <div class="h3 font-weight-bold text-light  mb-1">
                                                Total Users</div>
                                             <div class="h1 mb-0 font-weight-bold text-light">
-                                            <?php $sql = "SELECT COUNT(User_ID)FROM users;"; 
+                                            <?php $sql = "SELECT COUNT(User_ID)FROM users WHERE USER_TYPE = 1;"; 
                                            
                                            $result = mysqli_query($con, $sql);
                                            
@@ -266,7 +266,15 @@ session_start();
                                         <div class="col mr-2">
                                             <div class="h3 font-weight-bold text-light mb-1">
                                                 Total Clubs</div>
-                                            <div class="h1 mb-0 font-weight-bold text-light">12</div>
+                                            <div class="h1 mb-0 font-weight-bold text-light">
+                                            <?php $sql = "SELECT COUNT(User_ID)FROM users WHERE USER_TYPE = 0;"; 
+                                           
+                                           $result = mysqli_query($con, $sql);
+                                           
+                                           $data = mysqli_fetch_assoc($result);
+                                           
+                                           echo $data['COUNT(User_ID)']?> 
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-chart-area fa-2x text-gray-300"></i>
