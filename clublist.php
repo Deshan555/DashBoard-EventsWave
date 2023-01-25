@@ -1,3 +1,7 @@
+<?php 
+    include("connection1.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +15,13 @@
     <link href="img/logo.png" rel="icon">
     <title>Club List</title>
 
+
+    <!-- jquery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+
+    <!-- bootstrap growl js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-growl-ifightcrime@1.1.0/jquery.bootstrap-growl.min.js"></script>
+    
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -56,7 +67,7 @@
 
             <!-- Nav Item - add & remove clubs -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="clublist.php" >
+                <a class="nav-link collapsed" href="clublist.html" >
                     <i class="fa fa-list-ol" ></i>
 
 
@@ -66,17 +77,9 @@
 
              <!-- Nav Item - user list -->
              <li class="nav-item">
-                <a class="nav-link collapsed" href="userlist.php" >
+                <a class="nav-link collapsed" href="userlist.html" >
                     <i class="fa fa-users" aria-hidden="true"></i>
                     <span>User List</span>
-                </a>   
-            </li>
-
-      <!-- Nav Item - special events -->
-                       <li class="nav-item">
-                <a class="nav-link collapsed" href="specialevents.php" >
-                <i class="fa fa-th-large" aria-hidden="true"></i>
-                 <span>Special Events</span>
                 </a>   
             </li>
 
@@ -129,42 +132,60 @@
                     <table class="table table-hover">
                     <thead>
                     <tr>
-                    <th>Register ID</th>
+                    <th>Club ID</th>
                     <th>Club Name</th>
                     <th>Action</th>
                     </tr>
                     </thead>
+
                     <tbody>
-                    
+                      
                     <?php
+                    
+                    $sql = "select * from `clubs`";
+                    $result = mysqli_query($con,$sql);
+                    if($result){
+                        while($row=mysqli_fetch_assoc($result)){
+                            $club_id=$row['club_id'];
+                            $club_name=$row['club_name'];
+                            echo '<tr>
+                            <td>'.$club_id.'</td>
+                            <td>'.$club_name.'</td>
 
-                    require('get_Clubs.php');
-
-                    foreach ($clubs as $members){
-
+                            <td>
+                                
+                            <a href="clubs_delete.php? deleteid='.$club_id.'" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a class="keep  keepbtn" onclick="bootstrapAlert()" title="Keep" data-toggle="tooltip"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                            
+                            </td>
+                        </tr>';
+                        }
+                    }
                     ?>
 
-                    <tr>
-                        <td><?php echo $members['User_ID'];?></td>
-                        <td><?php echo $members['FULL_NAME'];?></td>
-                    <td>
                     
-                    <button class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                    <button class="keep" title="Keep" data-toggle="tooltip"><i class="fa fa-check-circle" aria-hidden="true"></i></button>
-                   
-                    </td>
-                    </tr>
-
-                    <?php }?>
-                
-                </tbody>
+                    </tbody>
                     </table>
                     </div>
                 </div>
                
             </div>
 
-           
+            <script>
+
+                function bootstrapAlert() {
+                    $(".bootstrap-growl").remove();
+                    $.bootstrapGrowl(" viewed!",{
+                        type: "success",
+                        offset: {from:"top",amount:250},
+                        align:"center",
+                        delay:500,
+                        allow_dismiss: true,
+                        stackup_spacing:10
+                    });
+                }
+                
+                </script>
     
 </body>
 </html>

@@ -1,3 +1,7 @@
+<?php 
+    include("connection1.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,33 +15,25 @@
     <link href="img/logo.png" rel="icon">
     <title>User List</title>
 
+
+    <!-- jquery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+
+    <!-- bootstrap growl js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-growl-ifightcrime@1.1.0/jquery.bootstrap-growl.min.js"></script>
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> 
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-    <script>
-        function myFunction() {
-            var x;
-            var r = confirm("Do you really want to remove this user from system? Press OK for Remove Press Cancel for Keep user!!!");
-            if (r == true) {
-                window.location.href = "././deleteuser.php"
-        }
-            else {
-            x = "Keep user in database!!!";
-        }
-        document.getElementById("demo").innerHTML = x;
-        }
-
-    </script>
 </head>
 
 <body id="page-top">
@@ -71,7 +67,7 @@
 
             <!-- Nav Item - add & remove clubs -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="clublist.php" >
+                <a class="nav-link collapsed" href="clublist.html" >
                     <i class="fa fa-list-ol" ></i>
 
 
@@ -81,17 +77,9 @@
 
              <!-- Nav Item - user list -->
              <li class="nav-item">
-                <a class="nav-link collapsed" href="userlist.php" >
+                <a class="nav-link collapsed" href="userlist.html" >
                     <i class="fa fa-users" aria-hidden="true"></i>
                     <span>User List</span>
-                </a>   
-            </li>
-
-                  <!-- Nav Item - special events -->
-                  <li class="nav-item">
-                <a class="nav-link collapsed" href="specialevents.php" >
-                <i class="fa fa-th-large" aria-hidden="true"></i>
-                 <span>Special Events</span>
                 </a>   
             </li>
 
@@ -132,7 +120,8 @@
                   <i class="fas fa-search"></i>
                 </button>
             </div>
-
+    
+        <form method="$_POST">   
             <div class="table-responsive">
                 <div class="table-wrapper">
                     <div class="table-title">
@@ -149,40 +138,56 @@
                     <th>Action</th>
                     </tr>
                     </thead>
+
                     <tbody>
 
                     <?php
-
-                    require('get_Users.php');
-
-                    foreach ($users as $members){
-
-                    ?>
-
-                    <tr>
-                        <td><?php echo $members['User_ID'];?></td>
-                        <td><?php echo $members['FULL_NAME'];?></td>
-                    <td>
                     
-                    <button onclick="myFunction()" ><i class="fa fa-trash"></i></button>
-                    <button ><i class="fa fa-check-circle"></i></button>
-                    <p id="demo"></p>
-                    
+                    $sql = "select * from `Users`";
+                    $result = mysqli_query($con,$sql);
+                    if($result){
+                        while($row=mysqli_fetch_assoc($result)){
+                            $id=$row['User_ID'];
+                            $name=$row['FULL_NAME'];
+                            echo '<tr>
+                            <td>'.$id.'</td>
+                            <td>'.$name.'</td>
 
-                   
-                    </td>
-                    </tr>
-
-                    <?php }?>
+                            <td>
+                                
+                            <a href="users_delete.php? deleteid='.$id.'" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a class="keep  keepbtn" onclick="bootstrapAlert()" title="Keep" data-toggle="tooltip"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
                             
-                </tbody>
+                            </td>
+                        </tr>';
+                        }
+                    }
+                    ?>
+                    
+            
+                    </tbody>
                     </table>
                     </div>
                 </div>
-               
+            
             </div>
+        </form> 
+        
+        <script>
 
-           
-    
+        function bootstrapAlert() {
+            $(".bootstrap-growl").remove();
+            $.bootstrapGrowl(" viewed!",{
+                type: "success",
+                offset: {from:"top",amount:250},
+                align:"center",
+                delay:500,
+                allow_dismiss: true,
+                stackup_spacing:10
+            });
+        }
+        
+        </script>
+       
 </body>
 </html>
